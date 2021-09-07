@@ -1,0 +1,18 @@
+
+  .div-container {
+    height: 200px;
+  }
+  
+  .vertical-center {
+    color: lightskyblue;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  .font-50{
+      font-size: 30px;
+  }

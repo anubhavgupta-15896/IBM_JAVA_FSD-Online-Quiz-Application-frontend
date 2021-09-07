@@ -1,0 +1,32 @@
+.quiz-item {
+  border: 1px solid grey;
+  margin: 2px;
+
+  .quiz-item-content {
+    border: 1px solid var(--surface-d);
+    border-radius: 3px;
+    margin: 0.3rem;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .quiz-image {
+    width: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+}
+.ribbon {
+  width: 160px;
+  height: 32px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0px 2px 3px rgba(136, 136, 136, 0.25);
+  background: #4dbe3b;
+  transform: rotate(45deg);
+  position: absolute;
+  right: -42px;
+  top: 20px;
+  padding-top: 7px; 
+}

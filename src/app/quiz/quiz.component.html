@@ -1,0 +1,118 @@
+<div id="app" style="overflow: hidden;">
+	<div>
+		<div style="min-height:50vh">
+			<div id="test-portal">
+				<div class="test-container">
+					<div style="display: none;"></div>
+					<div class="test-header">
+						<div>{{quiz.name}}</div>
+						
+					</div>
+					<div class="test-info">
+						<div class="test-sections">
+						</div>
+						<div class="test-time-info">
+							<span class="p-2">Time Elapsed : {{this.displayTimeElapsed()}}</span>
+						</div>
+						<div class="test-user-info">
+							<div class="user-image">
+								<img src="assets/images/trial-candidate.png" width="60px">
+							
+							</div>
+							<div class="time-status">
+								<span style="padding-top:10px;">{{userData.firstName}} {{userData.lastName}}<br/> {{userData.emailId}} </span>
+							</div>
+						</div>
+					</div>
+					<div class="test-content">
+						<div class="tc-question-section">
+							<div class="tc-question" id="1"> 
+								<div style="color: blue; font-size: 130%; font-weight: bold;">Q.{{qnProgress+1}}</div>
+								<!-- <span>{{quiz.questions[qnProgress].description}}
+									<br> 
+								</span>  -->
+								<span>{{userQuizHistory[qnProgress].question.description}}
+									<br> 
+								</span> 
+							</div> 
+							<div class="tc-answer">
+								<form #options="ngForm" novalidate>
+								<div> 
+									<span> 
+										<input type="radio"  name="option" value="{{quiz.questions[qnProgress].option1}}" (change)="changeQuesPalletColorAndSaveAnswer(qnProgress,options.value)" class="answer_option" ngModel/> 
+									</span>
+									<label for="option-1">
+										<span>
+											{{userQuizHistory[qnProgress].question.option1}}
+										</span> 
+									</label> 
+								</div>
+								<div> 
+									<span> 
+										<input type="radio" name="option" value="{{quiz.questions[qnProgress].option2}}" (change)="changeQuesPalletColorAndSaveAnswer(qnProgress,options.value)" class="answer_option" ngModel/> 
+									</span>
+									<label for="option-2"> 
+										<span> 
+											{{userQuizHistory[qnProgress].question.option2}}
+										</span> 
+									</label> 
+								</div>
+									<div> 
+									<span> 
+										<input type="radio" name="option" value="{{quiz.questions[qnProgress].option3}}" (change)="changeQuesPalletColorAndSaveAnswer(qnProgress,options.value)" class="answer_option" ngModel/> 
+										</span>
+										<label for="option-3"> 
+											<span> 
+												{{userQuizHistory[qnProgress].question.option3}}
+											</span> 
+										</label> 
+									</div>
+									<div> 
+									<span> 
+										<input type="radio" name="option" value="{{quiz.questions[qnProgress].answerOption}}" (change)="changeQuesPalletColorAndSaveAnswer(qnProgress,options.value)" class="answer_option" ngModel/> 
+										</span>
+										<label for="option-4"> 
+											<span> 
+												{{userQuizHistory[qnProgress].question.answerOption}}
+											</span> 
+										</label> 
+									</div>
+								</form>
+									</div>
+							<div class="test-actions">
+									<div class="row">
+										<div class="test-action-item col-3">
+											<button class="orange clear_response" (click)="clearSubmittedOption(options)">Clear Response</button> 
+										</div>
+										<div class="test-action-item col-3">
+											<!-- <button class="orange next " name="next" [disabled] ="(qnProgress+1) == quiz.numberofquestions" (click)="nextQuestion(option1.checked ? option1.value : option2.checked ? option2.value : option3.checked ? option3.value : option4.value)" >Next</button>   -->
+											<button class="orange next " name="next" [disabled] ="(qnProgress+1) == quiz.numberofquestions" (click)="nextQuestion(options)" >Next</button>
+										</div>
+									</div> 
+								</div>
+						</div>
+						
+						<div class="tc-questions-status ">
+							 
+							<div class="tcq-status-list">
+								<span class="tcqs-list-header">Choose a Question</span>
+								<div *ngFor="let question of quiz.questions;let i = index">
+									<!-- <div class="circle red question_navigation" id="que" (click)="nextQuestionByPallet(i)" [class.Active]="isAnswered">{{i+1}}</div> -->
+									<div [ngClass]="selectedQues[i] ? 'green' : 'red'" class="circle question_navigation" id="que" (click)="nextQuestionByPallet(i,options)">{{i+1}}</div>
+								</div>
+							</div>
+							<div class="test-actions">
+								<div class="">
+									<div class="test-action-item">
+										<button class="red test-submit" (click)="submitTest()">Submit</button> 
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+

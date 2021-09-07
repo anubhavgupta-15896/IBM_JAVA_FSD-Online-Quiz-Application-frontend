@@ -1,0 +1,190 @@
+<!-- <div class="basic-container" style="display: grid">
+  <mat-toolbar color="primary"> WELCOME TO QUIZ </mat-toolbar>
+  <mat-toolbar
+    class="menu-bar mat-elevation-z1"
+    style="background-color: #f8eee7"
+  >
+    <span *ngFor="let item of navItems"> -->
+      <!-- Handle branch node buttons here -->
+      <!-- <span *ngIf="item.children && item.children.length > 0">
+        <button
+          mat-button
+          [matMenuTriggerFor]="menu.childMenu"
+          [disabled]="item.disabled"
+        >
+          {{ item.displayName }}
+        </button>
+        <app-menu-item #menu [items]="item.children"></app-menu-item>
+      </span> -->
+      <!-- Leaf node buttons here -->
+      <!-- <span *ngIf="!item.children || item.children.length === 0">
+        <button mat-button color="primary" [routerLink]="item.route">
+          {{ item.displayName }}
+        </button>
+      </span>
+    </span>
+  </mat-toolbar> -->
+  <!-- <router-outlet name="withoutHeadNav"></router-outlet> -->
+<!-- </div> -->
+
+
+<nav class="navbar navbar-expand-lg"  style="background-color:lightblue">
+  <div style="width:50px"></div><img src="/assets/images/mapple3.png" style="width: 120px;"><div style="width:100px"></div>
+  <div style="width: 60%;"></div>
+
+   <div *ngIf="loginStatus=='OK'; else elseBlock">
+     <div class="dropdown">
+          <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
+               Welcome <b>{{userData.firstName}}</b>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" [routerLink]="['/my-profile']">Profile</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/myQuizes']">My Quizes</a></li>
+            <li><a class="dropdown-item" href="" (click)="UserLogout()">Logout</a></li>
+          </ul>
+        </div>
+          
+        <!-- <button type="button" class="btn btn-link" (click)="UserLogout()">Logout</button>
+        <div class="btn-group" dropdown>
+          <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+               User <span class="caret"></span>
+          </button>
+          <ul dropdownMenu class="dropdown-menu" role="menu">
+               <li role="menuitem"><a class="dropdown-item" href="">Welcome <b>{{userData.firstName}}</b></a></li>
+               <li role="menuitem"><a class="dropdown-item" href="#">Profile</a></li>
+               <li role="menuitem"><a class="dropdown-item" href="#">MyQuizes</a></li>
+               <li role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
+          </ul> -->
+          <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button">MyQuizes</button>
+            <button class="dropdown-item" type="button">Logout</button>
+          </div> -->
+        <!-- </div> -->
+   </div>
+   <ng-template #elseBlock>
+     <button type="button" class="btn btn-link" (click)="openLoginModal()">SignIn</button>/
+     <button type="button" class="btn btn-link" (click)="openUserRegModal()">SignUp</button>
+   </ng-template>
+  <!-- <button type="button" class="btn btn-link" (click)="openLoginModal()">SignIn</button>/
+  <button type="button" class="btn btn-link" (click)="openUserRegModal()">SignUp</button> -->
+</nav>
+<div class="modal"  role="dialog"  [style.display]="loginModalStyle">
+  <div class="modal-dialog" role="document">
+       <div class="modal-content">
+            <form #loginForm="ngForm" (ngSubmit)="userLogin()">
+            <div class="modal-header">
+                 <h4 class="modal-title">Login Form</h4>
+                 <button type="button" class="close" data-dismiss="modal"  (click)="closeLoginModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                 <div>
+                      <span *ngIf="errorMessage != ''" style="color:red; text-align: center;">{{errorMessage}}</span>
+                      <div class="form-group">
+                           <label for="uid">Username</label>
+                           <input type=text class="form-control"name="uname" value="" placeholder=username [(ngModel)]="uname" #username="ngModel" required [class.is-invalid]="username.invalid && username.touched"> 
+                           <small class="text-danger" [class.d-none]="username.valid || username.untouched">username is requied field</small>
+                      </div> 
+                      <div class="form-group">
+                           <label for="pwd">Password</label>
+                           <input type=password class="form-control" name="pwd"  value="" placeholder=password [(ngModel)]="pwd" #password="ngModel" required [class.is-invalid]="password.invalid && password.touched"> 
+                           <small class="text-danger" [class.d-none]="password.valid || password.untouched">password is requied field</small>
+                      </div> 
+                 </div> 
+            </div>
+            <div class="modal-footer">
+                 <button [disabled]="loginForm.form.invalid" type=submit class="btn btn-primary btn-strech">SignIn</button> 
+            </div>
+          </form>
+       </div>
+  </div>
+</div>
+
+<div class="modal"  role="dialog"  [style.display]="regModalStyle">
+  <div class="modal-dialog" role="document">
+       <div class="modal-content">
+            <form #registerForm="ngForm" (ngSubmit)="registerUser()">
+            <div class="modal-header">
+                 <h4 class="modal-title">User Registration</h4>
+                 <!--<button type="button" class="close" aria-label="Close" (click)="closeUserRegModal()"><span aria-hidden="true">&times;</span></button>-->
+                 <button type="button" class="close" data-dismiss="modal"  (click)="closeUserRegModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                 
+          <span *ngIf="regSuccessMessage != ''" style="color:green; text-align: center;">{{regSuccessMessage}}</span>
+          <span *ngIf="regErrorMessage != ''" style="color:red; text-align: center;">{{regErrorMessage}}</span>
+
+                 <div>
+                      <div class="form-group">
+                           <input type=text class="form-control"name="uid"  placeholder=username [(ngModel)]="uid" #reguname="ngModel" required [class.is-invalid]="reguname.invalid && reguname.touched"> 
+                           <small class="text-danger" [class.d-none]="reguname.valid || reguname.untouched">username is requied field</small>
+                      </div> 
+                      <div class="form-group">
+                           <input type=password class="form-control" name="regpwd" placeholder=password [(ngModel)]="regpwd" #pwd1="ngModel" required [class.is-invalid]="pwd1.invalid && pwd1.touched"> 
+                           <small class="text-danger" [class.d-none]="pwd1.valid || pwd1.untouched">password is requied field</small> 
+                      </div> 
+                      <div class="form-group">
+                           <input type=text class="form-control" name="fname" placeholder=Firstname [(ngModel)]="fname" #firstname="ngModel" required [class.is-invalid]="firstname.invalid && firstname.touched"> 
+                           <small class="text-danger" [class.d-none]="firstname.valid || firstname.untouched">FirstName is requied field</small>  
+                      </div> 
+                      <div class="form-group">
+                           <input type=text class="form-control" name="lname" placeholder=Lastname [(ngModel)]="lname" #lastname="ngModel" required [class.is-invalid]="lastname.invalid && lastname.touched"> 
+                           <small class="text-danger" [class.d-none]="lastname.valid || lastname.untouched">LastName is requied field</small>   
+                      </div> 
+                      <div class="form-group">
+                           <input type=text class="form-control" name="mobile" placeholder="Mobile No." [(ngModel)]="mobile" #mobileno="ngModel" required pattern="^((\\+91-?)|0)?[0-9]{10}$" [class.is-invalid]="mobileno.invalid && mobileno.touched"> 
+                           <!-- <small class="text-danger" [class.d-none]="mobileno.valid || mobileno.untouched">Mobile No. is requied field</small>   -->
+                           <div *ngIf="mobileno.errors && (mobileno.invalid && mobileno.touched)">
+                              <small class="text-danger" *ngIf="mobileno.errors.required">Mobile No is required</small>
+                              <small class="text-danger" *ngIf="mobileno.errors.pattern">Enter the valid Mobile No</small>
+                         </div>
+                      </div> 
+                      <div class="form-group">
+                           <input type=text class="form-control" name="email" placeholder=Email [(ngModel)]="email" #emailId="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [class.is-invalid]="emailId.invalid && emailId.touched"> 
+                           <!-- <small class="text-danger" [class.d-none]="emailId.valid || emailId.untouched">Email is requied field</small>  -->
+                           <div *ngIf="emailId.errors && (emailId.invalid && emailId.touched)">
+                                <small class="text-danger" *ngIf="emailId.errors.required">Email Id is required</small>
+                                <small class="text-danger" *ngIf="emailId.errors.pattern">Enter the valid email id</small>
+                           </div>
+                      </div> 
+                      
+                 </div> 
+            </div>
+            <div class="modal-footer">
+                 <button [disabled]="registerForm.form.invalid" type=submit class="btn btn-primary btn-lg">Register</button>  
+            </div>
+          </form>
+       </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row">
+       <div class="col-md-3 col-lg-3">
+            <ul class="list-group">
+                 <li class="list-group-item">Quiz
+                  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let subject of subjectList" (click)="getQuizListBySubject(subject)">{{subject}}</li>
+                    </ul>
+                 </li>
+                 <li class="list-group-item" (click)="getPreparationMaterial()">Preparation Material
+                  <ul class="list-group">
+                    <li class="list-group-item">PDF</li>
+                    <li class="list-group-item">Videos</li>
+                  </ul>
+                 </li>
+                 <li class="list-group-item" (click)="getPlans()">Subcription Plans</li>
+                 <li class="list-group-item" (click)="getForum()">Discussion Forum
+                 </li>
+            </ul>
+            </div>
+       <div class="col-md-9" col-lg-9>
+           
+          <span *ngIf="successMessage != ''" style="color:green; text-align: center;">{{successMessage}}</span>
+       <router-outlet></router-outlet>
+       </div>
+  </div>
+  </div>
+
+<!-- <home></home>
+<product-list></product-list>-->

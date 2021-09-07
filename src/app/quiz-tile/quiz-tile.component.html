@@ -1,0 +1,25 @@
+<!-- <div class="quiz-item">
+  <div class="quiz-item-content">
+    <div class="p-mb-3"></div>
+    <div>
+      <h3 class="p-mb-1">{{ quizItem.name }}</h3>
+      <div>
+        <p-button type="button" styleClass="p-button" (click)="navigateToQuiz()">START</p-button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="card" style="overflow: hidden;">
+  <span *ngIf="quizItem.type =='free'" class="ribbon">Free</span>
+  <img src="assets/images/quiz-img.png" width="80%" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h2 class="card-title" >{{quizItem.name}}</h2>
+    <button type="button" class="btn btn-primary" (click)="navigateToQuiz()">START</button>
+    
+  </div>
+</div>
+
+<!-- <window *ngIf="showPortal" >
+  <app-quiz [quizItem]="quizItem"></app-quiz>
+  <h1>gdfgdgdg</h1>
+</window> -->

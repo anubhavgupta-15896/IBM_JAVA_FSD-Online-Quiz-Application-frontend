@@ -1,0 +1,15 @@
+<div class="container ">
+  <h1 class="mt-2">Free Quizes</h1>
+  <div class="row" *ngIf="freequizListItems.length > 0">
+    <div class="col-3"  *ngFor="let quizItem of freequizListItems" style="text-align: center;">
+      <quiz-tile [quizItem]="quizItem"></quiz-tile>
+    </div>
+  </div>
+  <div *ngIf="freequizListItems.length == 0" class="m-3" style="color: grey;">No Free Quiz Found</div>
+  <h1 class="mt-2">Paid Quizes</h1>
+  <div class="row">
+    <div class="col-3" *ngFor="let quizItem of paidquizListItems" style="text-align: center;">
+      <quiz-tile [quizItem]="quizItem" [quizType]="quizItem.quizType"></quiz-tile>
+    </div>
+  </div>
+</div>

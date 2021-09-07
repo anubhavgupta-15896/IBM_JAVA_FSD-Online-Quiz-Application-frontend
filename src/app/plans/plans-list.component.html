@@ -1,0 +1,30 @@
+<section class="pricing-table">
+    <div class="container">
+      <div class="block-heading">
+        <h2>Our Pricing</h2>
+        
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="row">
+        
+        <div *ngFor = "let plan of plansList" class="col-md-5 col-lg-4">
+          <div class="item">
+            <div class="heading">
+              <h3>{{plan.planName}}</h3>
+            </div>
+            <div class="features">
+            
+              <h4><span class="feature">Duration</span> <br> <span class="value">{{plan.validityInDays}}</span></h4>
+            
+            </div>
+            <div class="price">
+              <h4>₹{{plan.planAmount}}</h4>
+            </div>
+            <button class="btn btn-block btn-outline-primary" type="submit" (click)="makePayment(plan)">BUY NOW</button>
+          </div>
+        </div>
+    </div>
+      </div>
+    </div>
+  </section>
